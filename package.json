@@ -1,0 +1,41 @@
+{
+  "name": "madar-market",
+  "type": "module",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"bun run dev:back\" \"bun run dev:front\"",
+    "dev:back": "bun run --filter=backend dev",
+    "dev:front": "bun run --filter=front dev",
+    "build": "bun run build:back && bun run build:front",
+    "build:back": "bun run --filter=backend build",
+    "build:front": "bun run --filter=front build",
+    "clean": "rm -rf node_modules packages/*/node_modules packages/*/.next packages/*/dist"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/bun": "^1.3.1",
+    "@types/jsonwebtoken": "^9.0.10",
+    "concurrently": "^9.1.2",
+    "prisma": "^6.17.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.4.0",
+    "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^6.17.1",
+    "bcryptjs": "^3.0.2",
+    "elysia": "^1.4.11",
+    "jsonwebtoken": "^9.0.2",
+    "next": "15.5.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "7.65.0",
+    "react-hot-toast": "2.6.0",
+    "yup": "^1.7.1"
+  }
+}
