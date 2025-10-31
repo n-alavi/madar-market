@@ -1,17 +1,10 @@
 "use client";
 
-import { useLogin } from "@/app/lib/auth";
-import { extractErrorMessages } from "@/app/lib/function";
-import { SigninFormData, signinSchema } from "@/app/lib/validation/auth";
-import { yupResolver } from "@hookform/resolvers/yup";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { OTPLoginFormData, otpLoginSchema } from "@/app/lib/validation/auth";
 
-type FormData = {
-    phoneNumber: string;
-    password: string;
-};
 
 export default function LoginPage() {
 
@@ -20,22 +13,21 @@ export default function LoginPage() {
 
     const {
         register,
-        setError,
-        clearErrors,
         handleSubmit,
         formState: { errors }
-    } = useForm<SigninFormData>({
-        resolver: yupResolver(signinSchema),
+    } = useForm<OTPLoginFormData>({
+        resolver: yupResolver(otpLoginSchema),
         mode: 'onChange'
     });
 
-    const onSubmit = (data: SigninFormData) => {
+    const onSubmit = (data: OTPLoginFormData) => {
+        // In production, you would call your API here to send OTP
         // login.mutate({
         //     phoneNumber: data.phoneNumber,
         // }, {
         //     onSuccess: (response) => {
-        //         // Redirect to OTP verification or next step
-        //         router.push('/verify-otp');
+        //         // Redirect to OTP verification
+        //         router.push(`/verify-otp?phone=${data.phoneNumber}`);
         //     },
         //     onError: (err) => {
         //         const { fieldErrors, generalMessage } = extractErrorMessages<FormData>(err);
@@ -52,24 +44,16 @@ export default function LoginPage() {
         //         }
         //     }
         // });
-        console.log('Form data:', data);
+
+        // For now, directly redirect to OTP page
+        router.push(`/verify-otp?phone=${data.phoneNumber}`);
     };
 
     return (
-        <div className="w-full space-y-6">
-            {/* Logo */}
-            <div className="flex justify-center mt-8">
-                <Image
-                    src="/ssets/logo.svg"
-                    alt="مادر مارکت"
-                    width={100}
-                    height={100}
-                    priority
-                />
-            </div>
-
+        <>
             {/* Title */}
             <h2 className="text-2xl font-medium text-right text-[#514F4D]">ورود</h2>
+
             {/* Login Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
 
@@ -116,19 +100,7 @@ export default function LoginPage() {
                 </div>
 
             </form>
-
-            {/* Bottom Image */}
-            <div className="flex justify-center mt-20">
-                <Image
-                    src="/ssets/login-image.svg"
-                    alt="Login Illustration"
-                    width={286}
-                    height={204}
-                    className="w-full max-w-xs h-auto"
-                    priority
-                />
-            </div>
-        </div>
+        </>
     );
 }
 
