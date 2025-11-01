@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import "./globals.css";
+import type { Metadata } from "next";
+import Footer from "./components/footer";
 
 export const metadata: Metadata = {
     title: "Madar Market",
@@ -17,6 +18,7 @@ export default function RootLayout({
                 <div className="w-full max-w-sm mx-auto px-4">
                     {children}
                 </div>
+                <Footer />
             </body>
         </html>
     );
