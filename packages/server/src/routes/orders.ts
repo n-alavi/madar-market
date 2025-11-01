@@ -137,7 +137,7 @@ export const orderRoutes = new Elysia({ prefix: '/orders' })
           user: {
             select: {
               id: true,
-              email: true,
+              phoneNumber: true,
               name: true,
             },
           },
@@ -168,7 +168,7 @@ export const orderRoutes = new Elysia({ prefix: '/orders' })
         user: {
           select: {
             id: true,
-            email: true,
+            phoneNumber: true,
             name: true,
           },
         },
